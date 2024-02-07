@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Users</title>
+</head>
+<body>
+{% block navbar %}
+    {% include 'includes/staffnavbar.html' %}
+{% endblock %}
+{% block content %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Messages</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user, messages in user_messages.items() %}
+                <tr>
+                    <td>{{ user }}</td>
+                    <td>{{ messages }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+</body>
+</html>

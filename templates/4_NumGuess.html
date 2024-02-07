@@ -1,0 +1,25 @@
+{% extends "gamebase.html" %}
+{% block title %}Number guessing game :D{% endblock %}
+{% block head %}<link rel="stylesheet" href="{{ url_for('static',filename='css/4_NumGuess.css') }}">{% endblock %}
+{% block header %}
+    <header class="bg-dark py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Guess the number</h1>
+                <p class="lead fw-normal text-white-50 mb-0">Enter a number from 1 to 100 within 10 attempts and stand a chance to win discounts</p>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+{% block content %}
+<div class="main-container">
+    <div class="num-container">
+        <input type="number" class="guess" id="guess" min="1" max="100">
+        <button class="submit" id="submit">Submit</button>
+        <p id="hint"></p>
+        <p id="attempts"></p>
+    </div>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+    <script src="{{ url_for('static',filename='js/guess.js') }}"></script>
+</div>
+{% endblock %}

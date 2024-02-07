@@ -1,0 +1,15 @@
+{% extends "dashboard.html" %}
+
+{% block content %}
+<div class="main_content">
+    <div class="display-4">Welcome Back {{ user['username'] }}</div>
+    <div class="info">
+        {% if user %}
+            <br>
+        {% endif %}
+        <h3>Games</h3>
+        <h3>Listings</h3>
+        <h3>Analytics</h3>
+    </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'dashboard2.html' %} {% block title %} <title>Update Product</title>{%
+endblock %} {% block content %} {% from './includes/formHelper2.html' import
+render_field %}
+
+<h1 class="display-4">Update Product</h1>
+
+<form method="POST" action="">
+  <div class="form-group">
+    {{ render_field(form.productImage, class="form-control") }}
+  </div>
+
+  <div class="form-group">
+    {{ render_field(form.productName, class="form-control") }}
+  </div>
+
+  <div class="form-group">
+    {{ render_field(form.productPrice, class="form-control") }}
+  </div>
+
+  <div id="prof">
+    <div class="form-group">
+      {{ render_field(form.productDesc, class="form-control") }}
+    </div>
+  </div>
+
+  <input type="submit" value="Submit" class="btn btn-primary" />
+</form>
+
+{% endblock %}

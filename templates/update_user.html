@@ -1,0 +1,63 @@
+{% extends "dashboard.html" %}
+
+{% block content %}
+    <h1 class="display-4">Edit Details</h1>
+    <form id="updateForm" method="POST" action="{{ url_for('update_user') }}" enctype="multipart/form-data">
+
+        <label for="password">Password*:</label>
+        <input class="form-control" type="password" id="password" name="password" value="{{ user['password'] }}" required>
+        <label for="email">Email*:</label>
+        <input class="form-control" type="email" id="email" name="email" value="{{ user['email'] }}" placeholder="example@gmail.com" required>
+        <label for="address">Address:</label>
+        <input class="form-control" type="text" id="address" name="address" value="{{ user['address'] }}">
+        <label for="phone_number">Phone Number*:</label>
+        <input class="form-control" type="text" id="phone_number" name="phone_number" value="{{ user['phone_number'] }}" required pattern="\d{8,}" placeholder="912345678">
+        <label for="profile_picture">Profile Picture:</label>
+        <input type="file" id="profile_picture" name="profile_picture" accept="image/*"><br><br>
+        {% if user.profile_picture %}
+            <p>Selected File: {{ user.profile_picture }}</p>
+            <p>Fields with * are required</p>
+        {% else %}
+            <p>No file chosen.</p>
+        {% endif %}
+
+        <input type="submit" class="btn btn-primary" value="Update" class="dashboard-button">
+    </form>
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+    <br>
+    <a href="{{ url_for('customer') }}" class="btn btn-primary">Back to Home</a>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmationModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmation</h5>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to update the customer details?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button id="confirmUpdate" type="button" class="btn btn-primary">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to trigger the modal when the form is submitted
+        document.getElementById('updateForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            $('#confirmationModal').modal('show');
+        });
+
+        // JavaScript to submit the form if user confirms in the modal
+        document.getElementById('confirmUpdate').addEventListener('click', function () {
+            document.getElementById('updateForm').submit();
+        });
+    </script>
+
+{% endblock %}

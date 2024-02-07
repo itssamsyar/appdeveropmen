@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block title %} Reports Page {% endblock %}
+
+{% block content %}
+<h1 class="display-4">Reports</h1>
+
+<div>
+    {% if count == 0%}
+        <p>There are no reports.</p>
+    {% elif count == 1 %}
+        <p>There is 1 report.</p>
+    {% else %}
+        <p>There are {{ count }} reports.</p>
+    {% endif %}
+</div>
+
+<div>
+    <table class="table table-striped">
+
+        <thead>
+            <tr>
+                <th>Report ID</th>
+                <th>Report Name</th>
+                <th>Report Description</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        {% for report in reportsList %}
+            <tr>
+                <td>{{ report.get_reportID() }}</td>
+                <td>{{ report.get_reportName() }}</td>
+                <td>{{ report.get_reportDesc() }}</td>
+
+<!--                <td><a href="/updateReport/{{ report.get_reportID() }}" class="btn btn-warning">Update</a></td>-->
+
+                <td>
+                    <form action="{{ url_for('deleteReport', id=report.get_reportID())}}" method="POST">
+
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal_{{report.get_reportID()}}">
+                            Delete
+                        </button>
+
+                        <div class="modal" id="myModal_{{report.get_reportID()}}">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Delete Confirmation</h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        Are you sure you want to Dismiss {{ report.get_reportID() }} {{ report.get_reportName() }}?
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <input type="submit" value="Delete" class="btn btn-danger">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </form>
+                </td>
+
+
+
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

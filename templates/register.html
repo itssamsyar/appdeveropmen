@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/matthias_style.css') }}">
+
+</head>
+<body>
+    <div class="container">
+    <input type="checkbox" id="check">
+    <div class="login form">
+      <header>Register</header>
+      <form method="POST" action="{{ url_for('register') }}">
+        <input type="text" id="username" name="username" placeholder="Enter your username">
+        <input type="password" id="password" name="password" placeholder="Enter your password">
+        <a href= "{{ url_for('login') }}">Have an account? Login</a>
+        <input type="submit" value="Register">
+      </form>
+    {% if message %}
+                <p>{{ message | safe }}</p>
+        {% endif %}
+    </div>
+
+</body>
+</html>

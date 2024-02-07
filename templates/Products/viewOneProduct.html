@@ -1,0 +1,44 @@
+{% extends 'dashboard2.html'%} {% block title %} View Product {% endblock %} {%
+block content %}
+<h1>View One Product Page</h1>
+<a href="/productCatalogue">Back</a>
+
+<br />
+
+<div class="card mb-3">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="..." class="img-fluid rounded-start" alt="..." />
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h2 class="card-title">{{ product.get_productName() }}</h2>
+        <p class="card-text">{{ product.get_productDesc() }}</p>
+        {% if product.get_numberOfFeedbacks() == 1%}
+        <p>Ratings: 0.0</p>
+        {% else %}
+        <p>
+          Ratings: {{ totalProductRating/(product.get_numberOfFeedbacks() - 1)
+          }}
+        </p>
+        {% endif %}
+        <a href="/viewProductFeedback/{{ product.get_productID() }}"
+          >{{ product.get_numberOfFeedbacks() - 1}} Reviews Available</a
+        >
+        {% if product.get_productID() not in purchasedList %}
+        <form method="POST" action="/stripe_pay">
+          <input type="hidden" id="price" value="{{ product.get_productPrice() }}">
+          {{ include "./includes/payment.html"}}
+        </form>
+
+        {% endif %}
+
+        <p class="card-text">
+          <small class="text-body-secondary">Last updated 3 mins ago</small>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

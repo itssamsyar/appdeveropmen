@@ -1,0 +1,107 @@
+{% extends 'dashboard2.html' %} {% block title %}
+<title>Product Seller Page</title> {% endblock %} {% block content %}
+<h1 class="display-4">Product Analytics</h1>
+
+<div>
+  {% if count == 0 %}
+  <p>There are no products.</p>
+  {% elif count == 1 %}
+  <p>There is 1 product.</p>
+  {% else %}
+  <p>There are {{ count }} products.</p>
+  {% endif %}
+</div>
+
+<p>{{createdProductIDList}}</p>
+
+<div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Product ID</th>
+        <th>Product Name</th>
+        <th>Product Price</th>
+        <th>Product Category</th>
+        <th>Product Status</th>
+        <th>Number of Listing Views</th>
+        <th>Product Description</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for product in filteredProductList %}
+      <tr>
+        <td>{{ product.get_productID() }}</td>
+        <td>{{ product.get_productName() }}</td>
+        <td>{{ "$%.2f"|format(product.get_productPrice()) }}</td>
+        <td>{{ product.get_productCategory() }}</td>
+
+        <td>{{ product.get_productStatus() }}</td>
+        <td>{{ product.get_productViewCount() }}</td>
+        <td>{{ product.get_productDesc() }}</td>
+
+        <td>
+          <a
+            href="/updateProduct/{{product.get_productID()}}"
+            class="btn btn-warning"
+            >Update</a
+          >
+        </td>
+
+        <td>
+          <form
+            action="{{ url_for('deleteProduct', id=product.get_productID())}}"
+            method="POST"
+          >
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-bs-toggle="modal"
+              data-bs-target="#myModal_{{product.get_productID()}}"
+            >
+              Delete
+            </button>
+
+            <div class="modal" id="myModal_{{product.get_productID()}}">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Delete Confirmation</h4>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                    ></button>
+                  </div>
+
+                  <div class="modal-body">
+                    Are you sure you want to delete {{ product.get_productID()
+                    }} {{ product.get_productName() }}?
+                  </div>
+
+                  <div class="modal-footer">
+                    <input
+                      type="submit"
+                      value="Delete"
+                      class="btn btn-danger"
+                    />
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

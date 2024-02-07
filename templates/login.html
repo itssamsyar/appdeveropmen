@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/matthias_style.css') }}">
+
+</head>
+<body>
+    <div class="container">
+    <input type="checkbox" id="check">
+    <div class="login form">
+      <header>Login</header>
+      <form method="POST" action="{{ url_for('login') }}">
+        <input type="text" id="username" name="username" placeholder="Enter your username" required >
+        <input type="password" id="password" name="password"  placeholder="Enter your password" required>
+        <a href="{{ url_for('register') }}")>Don't have an account? Register</a>
+        <input type="submit" value="Login">
+      </form>
+        <p class="display-6"> Continue with Google <a class="display-6" href='/stafflogin'><button class="btn btn-primary">Login</button></a> </p>
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+    </div>
+
+</body>
+</html>
+<!--
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <form method="POST" action="{{ url_for('login') }}">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        <input type="submit" value="Login">
+    </form>
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+-->

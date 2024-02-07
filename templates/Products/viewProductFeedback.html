@@ -1,0 +1,16 @@
+{% extends 'dashboard2.html' %} {% block title %}
+
+<title>Feedback of the Product</title> {% endblock %} {% block content %}
+
+<h3>Product Feedback</h3>
+
+{% for rating in product.get_productRating() %} {% if rating != 0 %}
+<p>{{ rating }}</p>
+{% endif %} {% endfor %} {% for feedback in product.get_productFeedback() %} {%
+if feedback != None %}
+<p>{{ feedback }}</p>
+{% endif %} {% endfor %}
+
+<button><a href="/productCatalogue">Back to Product Catalogue</a></button>
+
+{% endblock %}

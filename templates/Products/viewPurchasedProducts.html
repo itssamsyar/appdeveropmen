@@ -1,0 +1,33 @@
+{% extends 'dashboard.html' %}
+{% block title %} <title>View Purchased Products</title> {% endblock %}
+
+{% block content %}
+
+<h1>Recent Purchases</h1>
+<h3>Here are your recently bought products: </h3>
+<p>{{purchasedIDList}}</p>
+
+{% for product in productsList %}
+    {% if product.get_productID() in purchasedIDList %}
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+<!--                <img src="{{ '../uploads/' + product.get_productImage() }}" class="card-img-top" alt="{{  product.get_productName() }}">-->
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.get_productName() }}</h5>
+                    <h3>{{ "$%.2f"|format(product.get_productPrice()) }}</h3>
+                    <p class="card-text">{{product.get_productDesc()}}</p>
+                    {% if product.get_numberOfFeedbacks() ==  1%}
+                        <p>Ratings: 0.0</p>
+                    {% else %}
+                        <p>Ratings: {{ product.get_totalProductRating()/(product.get_numberOfFeedbacks() - 1) }}</p>
+                    {% endif %}
+                    <a href="/createFeedback/{{ product.get_productID() }}" class="btn btn-primary">Click Here to Add Feedback</a>
+                </div>
+            </div>
+        </div>
+        <br>
+    {% endif %}
+
+{% endfor %}
+
+{% endblock %}

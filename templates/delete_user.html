@@ -1,0 +1,103 @@
+<!--<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete User</title>
+</head>
+<body>
+    <h1>Delete User</h1>
+    <p>Are you sure you want to delete your account?</p>
+    <form action="/delete_user" method="POST">
+        <input type="submit" value="Delete Account">
+    </form>
+    <p>{{ message }}</p>
+</body>
+</html>
+
+ extends "dashboard.html"
+
+ block content
+<div class="main_content">
+    <div class="header" style="font-size: 30px;">Delete</div>
+    <div class="info">
+        <h1>Delete User</h1>
+        <p>Are you sure you want to delete your account?</p>
+        <form action="/delete_user" method="POST">
+            <input type="submit" value="Delete Account" class="dashboard-button" >
+        </form>
+        <p>{{ message }}</p>
+    </div>
+
+
+</div>
+ endblock
+-->
+
+{% extends "dashboard.html" %}
+
+{% block content %}
+
+<div class="main_content">
+    <div class="header" style="font-size: 30px;">Delete</div>
+
+    <div class="info">
+    <button type="button" class="header" style="font-size: 30px;" data-bs-toggle="modal"> <!--data-bs-target="#myModal_users.get_user()"-->
+    Delete
+    </button>
+
+    <div class="modal" ><!--id="myModal_users.get_user()"-->
+    <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title">Delete Confirmation</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        Are you sure you want to delete your account?
+      </div>
+
+      <div class="modal-footer">
+          <form action="/delete_user" method="POST">
+            <input type="submit" value="Delete Account" class="dashboard-button" >
+          </form>
+        <button type="button" class="dashboard-button" data-bs-dismiss="modal">Cancel</button>
+      </div>
+
+
+</div>
+{% endblock %}
+
+<!--
+<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal_{{customer.get_user_id()}}">
+  Delete
+</button>
+
+The Modal
+<div class="modal" id="myModal_{{customer.get_user_id()}}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      Modal Header
+      <div class="modal-header">
+        <h4 class="modal-title">Delete Confirmation</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      Modal body
+      <div class="modal-body">
+        Are you sure you want to delete {{customer.get_first_name()}} {{customer.get_last_name()}}?
+      </div>
+
+       Modal footer
+      <div class="modal-footer">
+        <input type="submit" value="Delete" class="btn btn-danger">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+-->
+
+

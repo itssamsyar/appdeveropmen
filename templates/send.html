@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}mail{% endblock %}
+
+
+{% block content %}
+
+    <h1>send mail</h1>
+    <form action="../mail " method="post">
+        <div class="form-group required">
+            <label class="control-label">send to</label>
+                <input type="text" name="send-to" required>
+            <br><br>
+            <label class="control-label">title</label>
+                <input type="text" name="title" required>
+            <br><br>
+        </div>
+        <textarea name="msg" cols="30" rows="10"></textarea><br><br>
+        <label class="control-label">offer:
+            <input type="number" name="offer" step=".01">
+        </label><br><br>
+        <input type="submit" value="submit">
+    </form>
+
+{% endblock %}
+
+
+
+
+

@@ -1,0 +1,73 @@
+{% extends "dashboard.html" %} {% block title %}<title>mail</title>{% endblock
+%} {% block content %}
+
+<div class="container px-4 px-lg-5 mt-5">
+  <div class="row">
+    <div class="col">
+      <ul class="list-group">
+        {% for key in mails %} 
+          {% if open_msg is defined %}
+  
+          <a class="text-decoration-none" href="{{ key }}">
+            <li class="list-group-item btn btn-primary">
+              {% if not mails %}
+                
+              {% endif %}
+              {{ mails[key].title }}
+            </li>
+          </a>
+  
+          {% else %}
+  
+          <a class="text-decoration-none" href="mail/{{ key }}">
+            <li class="list-group-item btn btn-primary">
+              {{ mails[key].title }}
+            </li>
+          </a>
+  
+          {% endif %} 
+        {% endfor %}
+      </ul>
+
+      <br /><br /><br /><br /><br />
+      {% if open_msg is defined %}
+      <a href="send">send mail</a>
+      {% else %}
+      <a href="mail/send">send mail</a>
+      {% endif %}
+    </div>
+    <div class="col-xl">
+      <div class="container border">
+        {% if open_msg is defined %}
+        <h1>from: {{ open_msg.sender }}</h1>
+        <h2 style="white-space: pre-wrap">{{ open_msg.msg }}</h2>
+        <br />
+        {% if open_msg.offer != '' %}
+        <p>offer: {{ open_msg.offer }}</p>
+        <br />
+        <form method="post" action="/stripe_pay">
+          <input type="hidden" id="price" value="{{ open_msg.offer }}" />
+          {% include "includes/payment.html" %}
+        </form>
+        {% endif %} {% endif %}
+      </div>
+    </div>
+  </div>
+
+  {% if receiver is defined %}
+  <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <img src="..." class="rounded mr-2" alt="...">
+      <strong class="mr-auto">Mail sent!</strong>
+      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="toast-body">
+      mail sent to {{ receiver }}
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+{% endblock %}

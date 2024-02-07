@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Users</title>
+</head>
+<body>
+{% block navbar %}
+    {% include 'includes/staffnavbar.html' %}
+{% endblock %}
+{% block content %}
+    <h1 class="display-4">Users</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user_dict in users %}
+                {% for username, user in user_dict.items() %}
+                    <tr>
+                        <td style="border-right: 1px solid #e0e4e4;">{{ user.username }}</td>
+                        <td style="border-right: 1px solid #e0e4e4;">{{ user.email }}</td>
+                        <td>
+                            <!-- ban user -->
+                            <form action="{{ url_for('staff_delete_user', username=username) }}" method="post" style="display: inline;">
+                                <button type="submit" class="btn btn-danger">Ban</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- pandas thingy -->
+    <a href="{{ url_for('export_users_excel') }}" class="btn btn-primary">Export Users to Excel</a>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,29 @@
+{% extends "dashboard.html" %}
+
+{% block content %}
+<h1 class="display-4">View Details</h1>
+    <div class="info">
+        {% if user %}
+            <p>Username: {{ user['username'] }}</p>
+            <br>
+            <p>Email: {{ user['email'] }}</p>
+            <br>
+            <p>Address: {{ user['address'] }}</p>
+            <br>
+            <p>Phone Number: {{ user['phone_number'] }}</p>
+            <br>
+            {% if user.profile_picture %}
+            <div class="profile-picture">
+                <img src="{{ url_for('static', filename='profile_pictures/' + user.profile_picture) }}" alt="Profile Picture">
+            </div>
+            {% else %}
+                <p>No profile picture available.</p>
+            {% endif %}
+        {% else %}
+            <p>No user details found.</p>
+        {% endif %}
+        <br>
+        <br>
+        <a class="btn btn-primary" href="{{ url_for('customer') }}">Back to Home</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,37 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/chatbot.css') }}">
+
+<div class="container">
+  <div class="chatbox">
+      <div class="chatbox__support">
+          <div class="chatbox__header">
+              <div class="chatbox__image--header">
+                  <img src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-5--v1.png" alt="image">
+              </div>
+              <div class="chatbox__content--header">
+                  <h4 class="chatbox__heading--header">Chat support</h4>
+                  <p class="chatbox__description--header">Hi, My name is Matthias Seah Hao Jun. How can I help you?</p>
+              </div>
+          </div>
+          <div class="chatbox__messages">
+                  <div class="chatbox__messagesv2">
+                  </div>
+                  <div class="messages__item messages__item--visitor">
+                      <p>Q1. How do I buy products?</p><br>
+                      <p>Q2. Where is Solaris HQ?</p><br>
+                      <p>Q3. How to report somebody?</p><br>
+                      <p>Q4. How to get A for appdev?</p><br>
+                      <p>Q5. Who is our group leader?</p><br>
+                  </div>
+          </div>
+          <div class="chatbox__footer">
+              <input type="text" placeholder="Write a message...">
+              <button class="chatbox__send--footer send__button">Send</button>
+          </div>
+      </div>
+      <div class="chatbox__button">
+          <button><img src="{{ url_for('static', filename='chatbot_images/solaris.png') }}" style="height: 100px; width: 100px;" /></button>
+      </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/chatbot.js') }}"></script>

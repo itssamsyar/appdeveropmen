@@ -1,0 +1,212 @@
+{% extends 'dashboard2.html' %} {% block title %}
+<title>Product Catalogue</title> {%endblock %} {% block content %}
+
+<h1>Product Catalogue Page</h1>
+
+<br />
+<br />
+
+<form method="POST" action="/searchedProductCatalogue">
+  <div class="input-group mb-3">
+    <input
+      name="search_query"
+      value="{{ query }}"
+      type="text"
+      class="form-control"
+      placeholder="Enter Product Name"
+      aria-label="Recipient's username"
+      aria-describedby="basic-addon2"
+    />
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="submit">Search</button>
+    </div>
+  </div>
+</form>
+
+<div class="btn-group float-end">
+  <h4 class="float-start">Sort By</h4>
+
+  <div class="dropdown">
+    <button
+      class="btn btn-secondary dropdown-toggle"
+      type="button"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+    >
+      Name
+    </button>
+    <ul class="dropdown-menu">
+      <li>
+        <a class="dropdown-item" href="/sortedProductCatalogueOnName(A-Z)"
+          >A-Z</a
+        >
+      </li>
+      <li>
+        <a class="dropdown-item" href="/sortedProductCatalogueOnName(Z-A)"
+          >Z-A</a
+        >
+      </li>
+    </ul>
+  </div>
+
+  <br />
+
+  <div class="dropdown">
+    <button
+      class="btn btn-secondary dropdown-toggle"
+      type="button"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+    >
+      Price
+    </button>
+    <ul class="dropdown-menu">
+      <li>
+        <a class="dropdown-item" href="/sortedProductCatalogueOnPriceIncreasing"
+          >Increasing</a
+        >
+      </li>
+      <li>
+        <a class="dropdown-item" href="/sortedProductCatalogueOnPriceDecreasing"
+          >Decreasing</a
+        >
+      </li>
+    </ul>
+  </div>
+
+  <br />
+
+  <div class="dropdown">
+    <button
+      class="btn btn-secondary dropdown-toggle"
+      type="button"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+    >
+      Popularity
+    </button>
+    <ul class="dropdown-menu">
+      <li>
+        <a
+          class="dropdown-item"
+          href="/sortedProductCatalogueOnPopularityMostPopular1"
+          >Most Popular</a
+        >
+      </li>
+      <li>
+        <a
+          class="dropdown-item"
+          href="/sortedProductCatalogueOnPopularityLeastPopular"
+          >Least Popular</a
+        >
+      </li>
+    </ul>
+  </div>
+</div>
+
+<br />
+<br />
+
+{% if sortedProducts %} 
+{% for product in sortedProducts %}
+<div class="col">
+  <div class="card" style="width: 18rem">
+    <!--                <img src="{{ '../uploads/' + product.get_productImage() }}" class="card-img-top" alt="{{  product.get_productName() }}">-->
+    <div class="card-body">
+      <h5 class="card-title">{{ product.get_productName() }}</h5>
+      <h3>{{ "$%.2f"|format(product.get_productPrice()) }}</h3>
+      <p class="card-text">{{product.get_productDesc()}}</p>
+      <a
+        href="/viewOneProduct/{{ product.get_productID() }} "
+        class="btn btn-primary"
+        >View Product</a
+      >
+      <br />
+      <br />
+      <form method="POST" action="/addingToBookmark">
+        <button
+          class="btn btn-primary"
+          name="bookmarkedProductID"
+          value="{{product.get_productID()}}"
+          type="submit"
+        >
+          Bookmark this Product
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<br />
+
+{% endfor %} {% endif %} {% if search_results %} {% for product in
+search_results %}
+<div class="col">
+  <div class="card" style="width: 18rem">
+    <!--                <img src="{{ '../uploads/' + product.get_productImage() }}" class="card-img-top" alt="{{  product.get_productName() }}">-->
+    <div class="card-body">
+      <h5 class="card-title">{{ product.get_productName() }}</h5>
+      <h3>{{ "$%.2f"|format(product.get_productPrice()) }}</h3>
+      <p class="card-text">{{product.get_productDesc()}}</p>
+      <a
+        href="/viewOneProduct/{{ product.get_productID() }} "
+        class="btn btn-primary"
+        >View Product</a
+      >
+      <br />
+      <br />
+      <form method="POST" action="/addingToBookmark">
+        <button
+          class="btn btn-primary"
+          name="bookmarkedProductID"
+          value="{{product.get_productID()}}"
+          type="submit"
+        >
+          Bookmark this Product
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endfor %} {% else %} 
+{% for product in productsList %}
+  {% if product.get_productID() not in allPurchasedProductIDList %}
+<div class="col">
+  <div class="card" style="width: 18rem">
+    <div class="profile-picture">
+      <img
+        src="{{ 'uploads/' + product.get_productImage() }}"
+        class="card-img-top"
+        alt="{{  product.get_productName() }}"
+      />
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ product.get_productName() }}</h5>
+      <h3>{{ "$%.2f"|format(product.get_productPrice()) }}</h3>
+      <p class="card-text">{{product.get_productDesc()}}</p>
+      <a
+        href="/viewOneProduct/{{ product.get_productID() }} "
+        class="btn btn-primary"
+        >View Product</a
+      >
+      <br />
+      <br />
+      <form method="POST" action="/addingToBookmark">
+        <button
+          class="btn btn-primary"
+          name="bookmarkedProductID"
+          value="{{product.get_productID()}}"
+          type="submit"
+        >
+          Bookmark this Product
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+<br />
+{% endif %}
+
+{% endfor %} 
+{% endif %} {% endblock %}

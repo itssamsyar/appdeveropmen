@@ -1,0 +1,27 @@
+{% extends 'dashboard.html' %}
+{% block title %}{% endblock %}
+
+{% block content %}
+    {% from 'includes/formHelper.html' import render_field %}
+
+    <h1 class="display-4">Create a Report</h1>
+
+    <form method="POST" action="">
+
+        <div class="form-group">
+            {{ render_field(form.reportName, class="form-control") }}
+        </div>
+
+        <div id="prof">
+            <div class="form-group">
+                {{ render_field(form.reportDesc, class="form-control") }}
+            </div>
+        </div>
+        <br>
+        <input type="submit" value="Submit" class="btn btn-primary">
+        <br>
+        <br>
+        <a class="btn btn-primary" href="{{ url_for('customer') }}">Back to Home</a>
+    </form>
+
+{% endblock %}

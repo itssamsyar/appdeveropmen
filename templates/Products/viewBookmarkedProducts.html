@@ -1,0 +1,37 @@
+{% extends 'dashboard.html' %}
+
+{% block title %} <title>Bookmarked Products</title> {% endblock %}
+
+
+{% block content %}
+
+<h1>Saved Products</h1>
+
+<h2>Here are your saved products:</h2>
+<p>{{userBookmarkedList}}</p>
+
+{% for product in productsList %}
+    {% if product.get_productID() in userBookmarkedList %}
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+<!--                <img src="{{ '../uploads/' + product.get_productImage() }}" class="card-img-top" alt="{{  product.get_productName() }}">-->
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.get_productName() }}</h5>
+                    <h3>{{ "$%.2f"|format(product.get_productPrice()) }}</h3>
+                    <p class="card-text">{{product.get_productDesc()}}</p>
+                    {% if product.get_numberOfFeedbacks() ==  1%}
+                        <p>Ratings: 0.0</p>
+                    {% else %}
+                        <p>Ratings: {{ product.get_totalProductRating()/(product.get_numberOfFeedbacks() - 1) }}</p>
+                    {% endif %}
+                    <form method="POST" action="/removeBookmarkedProduct">
+                        <button class="btn btn-primary" name="removeBookmarkedProductID" value="{{product.get_productID()}}" type="submit">Remove Saved Product</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <br>
+    {% endif %}
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,47 @@
+
+{% block title %}User Retrieval{% endblock %}
+
+{% block content %}
+<h1 class="display-4">User Retrieval</h1>
+<div>
+  {% if count == 0 %}
+  <p>There are no users.</p>
+  {% elif count == 1 %}
+  <p>There is 1 user.</p>
+  {% else %}
+  <p>There are {{ count }} users.</p>
+  {% endif %}
+</div>
+<div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>User ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Gender</th>
+        <th>Membership</th>
+        <th>Remarks</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for user in users_list %}
+     <tr>
+        <td>{{ user.get_user_id() }}</td>
+        <td>{{ user.get_first_name() }}</td>
+        <td>{{ user.get_last_name() }}</td>
+        <td>{{ user.get_gender() }}</td>
+        {% if user.get_membership() == "F" %}
+        <td>Fellow</td>
+        {% elif user.get_membership() == "S" %}
+        <td>Senior</td>
+        {% elif user.get_membership() == "P" %}
+        <td>Professional</td>
+        {% endif %}
+        <td>{{ user.get_remarks() }}</td>
+     </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}{% endblock %}
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+
+     <!-- Favicon-->
+     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+     <!-- Bootstrap icons-->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+     <!-- Core theme CSS (includes Bootstrap)-->
+     <link href="../static/css/styles.css" rel="stylesheet" />
+     <link rel="stylesheet" href="static/css/profile_picture.css">
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/chatbot.css') }}">
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="navbar-chunk">
+    <div class="wrapper">
+        {% block navbar %}
+        {% include 'includes/_dashboard_navbar.html' %}
+        {% endblock %}
+
+        {% block content %}
+        {% endblock %}
+     </div>
+    </div>
+</div>
+
+  <div class="container">
+    <div class="chatbox">
+        <div class="chatbox__support">
+            <div class="chatbox__header">
+                <div class="chatbox__image--header">
+                    <img src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-5--v1.png" alt="image">
+                </div>
+                <div class="chatbox__content--header">
+                    <h4 class="chatbox__heading--header">Chat support</h4>
+                    <p class="chatbox__description--header">Hi, My name is Matthias Seah Hao Jun. How can I help you?</p>
+                </div>
+            </div>
+            <div class="chatbox__messages">
+                    <div class="chatbox__messagesv2">
+                    </div>
+                    <div class="messages__item messages__item--visitor">
+                        <p>Q1. How do I buy products?</p><br>
+                        <p>Q2. Where is Solaris HQ?</p><br>
+                        <p>Q3. How to report somebody?</p><br>
+                        <p>Q4. How to get A for appdev?</p><br>
+                        <p>Q5. Who is our group leader?</p><br>
+                    </div>
+            </div>
+            <div class="chatbox__footer">
+                <input type="text" placeholder="Write a message...">
+                <button class="chatbox__send--footer send__button">Send</button>
+            </div>
+        </div>
+        <div class="chatbox__button">
+            <button><img src="{{ url_for('static', filename='chatbot_images/solaris.png') }}" style="height: 100px; width: 100px;" /></button>
+        </div>
+    </div>
+  </div>
+
+  <input type=hidden value='{{ username }}' id=hiddenfield>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+
+
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../static/js/scripts.js"></script>
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,28 @@
+{% extends 'dashboard.html' %}
+{% block title %} <title>Product Feedback Form</title> {% endblock %}
+
+
+{% block content %}
+  {% from './includes/formHelper2.html' import render_field %}
+
+  <h1>Product Feedback Form Page</h1>
+    <button><a href="/productCatalogue">Back to Product Catalogue</a></button>
+
+
+  <form method="POST" action="">
+
+        <div class="form-group">
+            {{ render_field(form.productRating, class="form-control") }}
+        </div>
+
+        <div id="prof">
+            <div class="form-group">
+                {{ render_field(form.productFeedback, class="form-control") }}
+            </div>
+        </div>
+
+        <input type="submit" value="Submit" class="btn btn-primary">
+
+    </form>
+
+{% endblock %}
